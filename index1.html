@@ -486,5 +486,193 @@
   <button class="pdf-fab no-print" onclick="window.print()">
   📄 حفظ كـ PDF
 </button>
+<!-- =========================================================
+       القسم الرابع: اختبار CSS التفاعلي (اختر الإجابة الصحيحة)
+       ========================================================= -->
+  <div class="page-break"></div>
+  <h2 id="quiz-section">القسم الرابع: تحدي الاختيار من متعدد (اختبر مستواك)</h2>
+
+  <div class="score-bar no-print">
+    <span>النتيجة الحالية: <strong id="score-val">0</strong> / <strong id="total-val">0</strong></span>
+    <button class="reset-btn" onclick="resetQuiz()">🔄 إعادة الاختبار</button>
+  </div>
+
+  <div id="mcq-container"></div>
+
+  <script>
+    // 1. بيانات ألغاز الاختيار من متعدد (يمكنك زيادة الأسئلة هنا بسهولة)
+    const cssQuizzes = [
+      {
+        q: "1. ما هي الخاصية التي تمنع الـ padding والـ border من زيادة العرض الكلي للعنصر؟",
+        options: ["box-sizing: content-box;", "box-sizing: border-box;", "overflow: hidden;", "display: inline-block;"],
+        correct: 1
+      },
+      {
+        q: "2. لديك عنصر أب display: flex; flex-direction: column;. كيف توّسط العناصر بداخله أفقياً (يمين ويسار)؟",
+        options: ["justify-content: center;", "align-items: center;", "text-align: center;", "margin: auto 0;"],
+        correct: 1
+      },
+      {
+        q: "3. أي من المحددات التالية يمتلك الأولوية (Specificity) الأقوى في CSS؟",
+        options: ["div.card > p", "#main-header", ".btn.primary.active", "body section div p"],
+        correct: 1
+      },
+      {
+        q: "4. كيف نجعل شبكة CSS Grid تنشئ أعمدة تلقائية بحد أدنى 250px لكل عمود وتملأ المساحة المتاحة؟",
+        options: [
+          "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));",
+          "grid-template-columns: repeat(3, 250px);",
+          "flex-wrap: wrap; min-width: 250px;",
+          "grid-auto-columns: 250px;"
+        ],
+        correct: 0
+      },
+      {
+        q: "5. ما وظيفة الخاصية pointer-events: none; عند وضعها على عنصر؟",
+        options: [
+          "تخفي العنصر من الشاشة تماماً",
+          "تمنع تحديد النص داخل العنصر",
+          "تجعل نقرات الماوس تمر من خلال العنصر للعنصر الذي تحته",
+          "تغير شكل مؤشر الماوس إلى علامة منع"
+        ],
+        correct: 2
+      },
+      {
+        q: "6. إذا كان حجم خط العنصر الجذري html هو 16px، وحجم خط الأب 24px، فكم يساوي 2rem؟",
+        options: ["48px", "32px", "20px", "16px"],
+        correct: 1
+      },
+      {
+        q: "7. ما الخاصية الحديثة التي تستهدف العنصر الأب (.form-group) فقط إذا كان بداخله حقل غير صالح (input:invalid)؟",
+        options: [
+          ".form-group > input:invalid",
+          ".form-group:has(input:invalid)",
+          ".form-group:not(input:invalid)",
+          "input:invalid + .form-group"
+        ],
+        correct: 1
+      },
+      {
+        q: "8. ما الفرق الجوهري بين visibility: hidden; و opacity: 0;؟",
+        options: [
+          "لا يوجد أي فرق بينهما",
+          "opacity: 0 تحذف العنصر من الصفحة، بينما visibility: hidden تحجز مكانه",
+          "العنصر بـ opacity: 0 يظل قابلاً للنقر، بينما visibility: hidden لا يستجيب للنقرات",
+          "visibility: hidden تدعم التحريك الناعم (Transition) بينما opacity لا تدعمه"
+        ],
+        correct: 2
+      },
+      {
+        q: "9. أي كود يجعل الخلفية ضبابية (تأثير الزجاج) لما يقع خلف الشريط العلوي؟",
+        options: [
+          "filter: blur(10px);",
+          "backdrop-filter: blur(10px);",
+          "opacity: 0.5; blur: 10px;",
+          "background-blur: 10px;"
+        ],
+        correct: 1
+      },
+      {
+        q: "10. عند استخدام position: sticky; top: 0; على عنصر، لماذا قد يفشل في الالتصاق أحياناً؟",
+        options: [
+          "لأن أحد العناصر الآباء له overflow: hidden أو overflow: auto",
+          "لأنه يجب وضع z-index: 999 معه دائماً",
+          "لأنه لا يعمل إلا مع display: flex",
+          "لأن قيمة top يجب أن تكون بالبكسل 0px"
+        ],
+        correct: 0
+      }
+    ];
+
+    let score = 0;
+    const container = document.getElementById("mcq-container");
+    const scoreEl = document.getElementById("score-val");
+    const totalEl = document.getElementById("total-val");
+
+    function renderQuiz() {
+      score = 0;
+      scoreEl.textContent = score;
+      totalEl.textContent = cssQuizzes.length;
+      container.innerHTML = "";
+
+      cssQuizzes.forEach((quiz, qIndex) => {
+        const card = document.createElement("div");
+        card.className = "item quiz-card";
+
+        const title = document.createElement("div");
+        title.className = "quiz-question";
+        title.textContent = quiz.q;
+        card.appendChild(title);
+
+        const optionsList = document.createElement("div");
+        optionsList.className = "quiz-options";
+
+        quiz.options.forEach((optText, optIndex) => {
+          const btn = document.createElement("button");
+          btn.className = "quiz-option-btn";
+          btn.textContent = optText;
+
+          btn.onclick = () => {
+            if (card.dataset.answered === "true") return;
+            card.dataset.answered = "true";
+
+            const allBtns = optionsList.querySelectorAll("button");
+            allBtns.forEach((b, idx) => {
+              b.disabled = true;
+              if (idx === quiz.correct) b.classList.add("correct");
+            });
+
+            if (optIndex === quiz.correct) {
+              score++;
+              scoreEl.textContent = score;
+            } else {
+              btn.classList.add("wrong");
+            }
+          };
+
+          optionsList.appendChild(btn);
+        });
+
+        card.appendChild(optionsList);
+        container.appendChild(card);
+      });
+    }
+
+    function resetQuiz() {
+      renderQuiz();
+      document.getElementById("quiz-section").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // 2. إضافة زر "إظهار/إخفاء الإجابة" تلقائياً لكل الألغاز الـ 150 السابقة!
+    function attachInteractiveAnswers() {
+      const answerItems = Array.from(document.querySelectorAll(".item.answer"));
+      const questionItems = Array.from(document.querySelectorAll(".item:not(.answer)"));
+      
+      // ربط الإجابات المخفية بالألغاز في القسم الأول والثاني (أول 100 لغز)
+      for (let i = 0; i < 100; i++) {
+        if (questionItems[i] && answerItems[i]) {
+          const ansClone = document.createElement("div");
+          ansClone.className = "inline-answer";
+          ansClone.innerHTML = answerItems[i].innerHTML;
+          ansClone.style.display = "none";
+
+          const toggleBtn = document.createElement("button");
+          toggleBtn.className = "reveal-btn no-print";
+          toggleBtn.textContent = "👁️ إظهار الإجابة";
+          toggleBtn.onclick = () => {
+            const isHidden = ansClone.style.display === "none";
+            ansClone.style.display = isHidden ? "block" : "none";
+            toggleBtn.textContent = isHidden ? "🙈 إخفاء الإجابة" : "👁️ إظهار الإجابة";
+          };
+
+          questionItems[i].appendChild(toggleBtn);
+          questionItems[i].appendChild(ansClone);
+        }
+      }
+    }
+
+    renderQuiz();
+    attachInteractiveAnswers();
+  </script>
 </body>
 </html>
