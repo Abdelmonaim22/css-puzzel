@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>دليل وألغاز CSS الشامل (150 لغزاً ودرساً)</title>
+  <link rel="stylesheet" href="custom.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    body {
+      font-family: 'Cairo', Tahoma, sans-serif;
+      line-height: 1.7;
+      color: #1e293b;
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 30px;
+      background: #fff;
+    }
+    h1 {
+      text-align: center;
+      color: #0f172a;
+      border-bottom: 3px solid #2563eb;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 10px 15px;
+      border-right: 5px solid #2563eb;
+      margin-top: 40px;
+      page-break-after: avoid;
+    }
+    h3 {
+      color: #334155;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 5px;
+      margin-top: 25px;
+      page-break-after: avoid;
+    }
+    .item {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      background: #f8fafc;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      page-break-inside: avoid;
+    }
+    .answer {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+    code {
+      font-family: Consolas, monospace;
+      background: #e2e8f0;
+      color: #be123c;
+      padding: 2px 6px;
+      border-radius: 4px;
+      direction: ltr;
+      display: inline-block;
+    }
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 15px;
+      border-radius: 8px;
+      direction: ltr;
+      text-align: left;
+      overflow-x: auto;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    @media print {
+      body { padding: 0; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print" style="background:#fef3c7; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center; border:1px solid #f59e0b;">
+    <strong>لحفظ هذا الملف كـ PDF:</strong> اضغط على <code>Ctrl + P</code> (أو <code>Cmd + P</code>) ثم اختر <strong>Save as PDF</strong>.
+  </div>
+
+  <h1>الدليل التطبيقي والألغاز التفاعلية في CSS</h1>
+
+  <h2>القسم الأول: 50 لغزاً في الأساسيات (Selectors, Box Model, Display, Position, Flex, Media)</h2>
+
+  <div class="item"><strong>لغز 1:</strong> لديك كود: <code>.box { width: 100px; padding: 20px; }</code> بدون <code>box-sizing</code>. كم سيصبح العرض الفعلي للصندوق على الشاشة؟</div>
+  <div class="item"><strong>لغز 2:</strong> لديك كود: <code>.box { width: 100px; padding: 20px; box-sizing: border-box; }</code>. كم سيصبح العرض الفعلي للصندوق؟</div>
+  <div class="item"><strong>لغز 3:</strong> عنصر يحمل <code>id="header"</code> و <code>class="top-bar"</code>. في الـ CSS كتبنا: <code>#header { color: red; }</code> و <code>.top-bar { color: blue; }</code>. ما هو لون النص؟</div>
+  <div class="item"><strong>لغز 4:</strong> لديك كود: <code>div p { color: green; }</code>. هل سيتلون <code>&lt;p&gt;</code> الموجود داخل <code>&lt;section&gt;</code> داخل <code>&lt;div&gt;</code> باللون الأخضر؟</div>
+  <div class="item"><strong>لغز 5:</strong> لديك كود: <code>div > p { color: green; }</code>. هل سيتلون <code>&lt;p&gt;</code> الموجود داخل <code>&lt;section&gt;</code> داخل <code>&lt;div&gt;</code> باللون الأخضر؟</div>
+  <div class="item"><strong>لغز 6:</strong> عنصر له <code>margin-bottom: 30px;</code> وتحته مباشرة عنصر له <code>margin-top: 20px;</code>. كم ستكون المسافة الفعلية بينهما؟</div>
+  <div class="item"><strong>لغز 7:</strong> عنصر له <code>display: none;</code> وعنصر آخر له <code>visibility: hidden;</code>. أيهما يختفي مع بقاء مكانه محجوزاً وفارغاً في الصفحة؟</div>
+  <div class="item"><strong>لغز 8:</strong> لديك كود: <code>span { width: 200px; height: 100px; }</code>. لماذا لن يتغير عرض أو ارتفاع العنصر؟</div>
+  <div class="item"><strong>لغز 9:</strong> كيف نجعل عنصر <code>&lt;span&gt;</code> يقبل <code>width</code> و <code>height</code> دون أن ينزل لسطر جديد؟</div>
+  <div class="item"><strong>لغز 10:</strong> لديك أب <code>display: flex;</code>. أين ستتجه العناصر بداخله افتراضياً (أفقياً أم عمودياً)؟</div>
+  <div class="item"><strong>لغز 11:</strong> في <code>display: flex; flex-direction: row;</code>، ما هي الخاصية المسؤولة عن توسيط العناصر أفقياً؟</div>
+  <div class="item"><strong>لغز 12:</strong> في <code>display: flex; flex-direction: row;</code>، ما هي الخاصية المسؤولة عن توسيط العناصر عمودياً؟</div>
+  <div class="item"><strong>لغز 13:</strong> إذا غيرنا اتجاه الـ Flex إلى <code>flex-direction: column;</code>، ما هي الخاصية التي أصبحت مسؤولة عن التوسيط العمودي؟</div>
+  <div class="item"><strong>لغز 14:</strong> لديك 3 عناصر داخل Flex وتريد أن يلتصق الأول باليمين، والثالث باليسار، والثاني في المنتصف تماماً. ما قيمة <code>justify-content</code>؟</div>
+  <div class="item"><strong>لغز 15:</strong> لديك 10 بطاقات داخل <code>display: flex;</code> ضاقت بها الشاشة. ما الخاصية التي تجعلها تنزل لسطر جديد بدل أن تنكمش؟</div>
+  <div class="item"><strong>لغز 16:</strong> عنصر بداخله نص، ونريد ترك مسافة <code>15px</code> بين النص وإطار العنصر. نستخدم <code>margin</code> أم <code>padding</code>؟</div>
+  <div class="item"><strong>لغز 17:</strong> لديك كود: <code>padding: 10px 20px 30px 40px;</code>. كم تبلغ قيمة الـ <code>padding-left</code>؟</div>
+  <div class="item"><strong>لغز 18:</strong> لديك كود: <code>margin: 10px 20px;</code>. كم تبلغ قيمة الـ <code>margin-right</code>؟</div>
+  <div class="item"><strong>لغز 19:</strong> كيف نوسط عنصر <code>div</code> له <code>width: 500px;</code> أفقياً في منتصف الصفحة باستخدام الـ <code>margin</code>؟</div>
+  <div class="item"><strong>لغز 20:</strong> عنصر له <code>position: absolute; top: 0; right: 0;</code> داخل أب له <code>position: static;</code> (الافتراضي). أين سيذهب الابن؟</div>
+  <div class="item"><strong>لغز 21:</strong> أين سيذهب الابن في اللغز السابق إذا أعطينا الأب <code>position: relative;</code>؟</div>
+  <div class="item"><strong>لغز 22:</strong> ما الفرق في السلوك عند التمرير (Scroll) بين <code>position: fixed;</code> و <code>position: absolute;</code>؟</div>
+  <div class="item"><strong>لغز 23:</strong> عنصران فوق بعضهما: الأول <code>z-index: 10;</code> والثاني <code>z-index: 99;</code> لكن بدون تحديد خاصية <code>position</code> لهما. أيهما سيظهر في الأعلى؟</div>
+  <div class="item"><strong>لغز 24:</strong> لديك كود: <code>.btn:hover { background: black; }</code>. متى يتم تنفيذ هذا التنسيق؟</div>
+  <div class="item"><strong>لغز 25:</strong> لديك كود: <code>input:focus { border-color: blue; }</code>. متى يتغير لون إطار حقل الإدخال للأزرق؟</div>
+  <div class="item"><strong>لغز 26:</strong> لديك كود: <code>@media (max-width: 600px) { body { background: red; } }</code>. إذا كان عرض شاشة المستخدم <code>800px</code>، هل ستكون الخلفية حمراء؟</div>
+  <div class="item"><strong>لغز 27:</strong> لديك كود: <code>@media (min-width: 768px) { .menu { display: flex; } }</code>. هل تعمل هذه القائمة كـ Flex على هاتف عرضه <code>400px</code>؟</div>
+  <div class="item"><strong>لغز 28:</strong> ما معنى العلامة <code>*</code> في كود: <code>* { margin: 0; padding: 0; }</code>؟</div>
+  <div class="item"><strong>لغز 29:</strong> لديك عنصر HTML: <code>&lt;button class="btn primary active"&gt;</code>. كيف نستهدفه في CSS بشرط أن يمتلك الكلاسات الثلاثة معاً؟</div>
+  <div class="item"><strong>لغز 30:</strong> لديك كود: <code>.card, .box { border: 1px solid; }</code>. ماذا تفعل الفاصلة <code>,</code> هنا؟</div>
+  <div class="item"><strong>لغز 31:</strong> في <code>display: flex;</code>، نريد وضع مسافة <code>20px</code> بين العناصر الداخلية دون استخدام <code>margin</code>. ما الخاصية الحديثة التي يستخدمها الـ AI؟</div>
+  <div class="item"><strong>لغز 32:</strong> لديك عنصر <code>div</code> فارغ تماماً وله <code>background: red;</code> بدون تحديد <code>height</code>. هل سيظهر المربع الأحمر؟</div>
+  <div class="item"><strong>لغز 33:</strong> لديك كود: <code>border: 2px dashed red;</code>. ما شكل الإطار؟</div>
+  <div class="item"><strong>لغز 34:</strong> عنصر له <code>width: 50%;</code> داخل أب عرضه <code>400px</code>. كم عرض الابن بالبكسل؟</div>
+  <div class="item"><strong>لغز 35:</strong> في Flexbox، لدينا عنصران: الأول <code>flex: 1;</code> والثاني <code>flex: 2;</code>. كم سيشغل العنصر الثاني من مساحة الأب؟</div>
+  <div class="item"><strong>لغز 36:</strong> ماذا يفعل الكود: <code>.modal.hidden { display: none; }</code>؟</div>
+  <div class="item"><strong>لغز 37:</strong> لديك كود: <code>p { color: red; } p { color: yellow; }</code>. ما لون النص النهائي؟</div>
+  <div class="item"><strong>لغز 38:</strong> لديك كود: <code>p { color: red !important; } p { color: yellow; }</code>. ما لون النص النهائي؟</div>
+  <div class="item"><strong>لغز 39:</strong> إذا كان للأب <code>display: flex;</code>، هل يتأثر "حفيد" العنصر (ابن الابن) بخصائص الـ Flex؟</div>
+  <div class="item"><strong>لغز 40:</strong> لديك كود: <code>position: fixed; inset: 0;</code>. ما مساحة وحجم هذا العنصر على الشاشة؟</div>
+  <div class="item"><strong>لغز 41:</strong> ما الفرق بين <code>.box.red</code> (بدون مسافة) و <code>.box .red</code> (بمسافة)؟</div>
+  <div class="item"><strong>لغز 42:</strong> لديك كود: <code>margin: -20px;</code>. هل القيمة السالبة مسموحة في الـ <code>margin</code> وماذا تفعل؟</div>
+  <div class="item"><strong>لغز 43:</strong> هل القيمة السالبة مسموحة في الـ <code>padding</code>؟</div>
+  <div class="item"><strong>لغز 44:</strong> في Flexbox، نريد جعل عنصر واحد فقط ينزل للأسفل بينما البقية في الأعلى. ما الخاصية التي نضعها على هذا العنصر؟</div>
+  <div class="item"><strong>لغز 45:</strong> لديك كود: <code>z-index: -1;</code>. أين سيذهب العنصر؟</div>
+  <div class="item"><strong>لغز 46:</strong> لديك عنصر <code>&lt;a&gt;</code> (رابط) وتريد إزالة الخط السفلي الذي يظهر تحته افتراضياً. ما الخاصية؟</div>
+  <div class="item"><strong>لغز 47:</strong> لديك قائمة <code>&lt;ul&gt;</code> وتريد إزالة النقاط السوداء التي تظهر بجانب عناصرها. ما الخاصية؟</div>
+  <div class="item"><strong>لغز 48:</strong> كيف تجعل مؤشر الماوس يتحول لشكل "يد" عند الوقوف فوق <code>div</code> ليبدو كأنه زر؟</div>
+  <div class="item"><strong>لغز 49:</strong> لديك كود: <code>border-radius: 50%;</code> على عنصر عرضه <code>100px</code> وارتفاعه <code>100px</code>. ما الشكل الناتج؟</div>
+  <div class="item"><strong>لغز 50:</strong> ماذا يحدث إذا طبقت <code>border-radius: 50%;</code> على عنصر عرضه <code>200px</code> وارتفاعه <code>100px</code>؟</div>
+
+  <div class="page-break"></div>
+  <h2>القسم الثاني: 50 لغزاً لتعلم مفاهيم وحيل CSS جديدة</h2>
+
+  <div class="item"><strong>لغز 51 (CSS Grid):</strong> يكتب الـ AI كثيراً: <code>display: grid; grid-template-columns: repeat(3, 1fr);</code>. كم عموداً سينتج وما عرض كل عمود؟</div>
+  <div class="item"><strong>لغز 52 (CSS Grid):</strong> في الكود السابق، ما معنى الوحدة <code>1fr</code>؟</div>
+  <div class="item"><strong>لغز 53 (CSS Grid):</strong> يكتب الـ AI أحياناً لتوسيط عنصر في منتصف الشاشة بسطرين فقط: <code>display: grid; place-items: center;</code>. ماذا تفعل <code>place-items: center</code>؟</div>
+  <div class="item"><strong>لغز 54 (Grid Span):</strong> في شبكة من 3 أعمدة، كتبنا لعنصر: <code>grid-column: span 2;</code>. كم عموداً سيمتد عليه هذا العنصر؟</div>
+  <div class="item"><strong>لغز 55 (وحدة rem):</strong> إذا كان حجم خط الصفحة الأساسي (html) هو <code>16px</code>، وكتب الـ AI: <code>font-size: 1.5rem;</code>. كم يساوي بالبكسل؟</div>
+  <div class="item"><strong>لغز 56 (وحدة em):</strong> إذا كان حجم خط الأب <code>20px</code>، وكتبنا للابن <code>padding: 2em;</code>. كم يساوي الـ padding بالبكسل؟</div>
+  <div class="item"><strong>لغز 57 (وحدة vh / vw):</strong> يكتب الـ AI لقسم البداية (Hero Section): <code>height: 100vh;</code>. ما هو ارتفاع هذا القسم؟</div>
+  <div class="item"><strong>لغز 58 (دالة calc):</strong> ماذا يحسب هذا الكود: <code>width: calc(100% - 80px);</code>؟</div>
+  <div class="item"><strong>لغز 59 (دالة clamp):</strong> يكتب الـ AI للخطوط المتجاوبة: <code>font-size: clamp(16px, 4vw, 32px);</code>. ما وظيفة هذه الدالة؟</div>
+  <div class="item"><strong>لغز 60 (المتغيرات):</strong> في أعلى الملف كتبنا: <code>:root { --primary: #000; }</code>. ما معنى <code>:root</code>؟</div>
+  <div class="item"><strong>لغز 61 (المتغيرات):</strong> كيف نستخدم المتغير السابق داخل كود الزر؟</div>
+  <div class="item"><strong>لغز 62 (Overflow):</strong> نص طويل خرج خارج حدود صندوق ارتفاعه <code>100px</code>. كتبنا للصندوق: <code>overflow: hidden;</code>. ماذا سيحدث للنص الزائد؟</div>
+  <div class="item"><strong>لغز 63 (Overflow):</strong> ماذا سيحدث إذا غيرناها إلى <code>overflow-y: auto;</code>؟</div>
+  <div class="item"><strong>لغز 64 (قص النص بنقاط):</strong> يكتب الـ AI 3 أسطر معاً: <code>white-space: nowrap; overflow: hidden; text-overflow: ellipsis;</code>. كيف سيظهر النص الطويل؟</div>
+  <div class="item"><strong>لغز 65 (Position Sticky):</strong> ما الفرق بين <code>position: fixed;</code> و <code>position: sticky; top: 0;</code>؟</div>
+  <div class="item"><strong>لغز 66 (Transform):</strong> كتبنا: <code>transform: translateY(-10px);</code>. إلى أين سيتحرك العنصر؟</div>
+  <div class="item"><strong>لغز 67 (Transform):</strong> كتبنا عند تمرير الماوس: <code>transform: scale(1.1);</code>. ماذا سيحدث لحجم العنصر؟</div>
+  <div class="item"><strong>لغز 68 (Transform):</strong> كتبنا: <code>transform: rotate(45deg);</code>. ماذا سيحدث للعنصر؟</div>
+  <div class="item"><strong>لغز 69 (التوسيط الكلاسيكي):</strong> يكتب الـ AI لتوسيط عنصر absolute في المنتصف: <code>top: 50%; left: 50%; transform: translate(-50%, -50%);</code>. لماذا نحتاج <code>translate(-50%, -50%)</code>؟</div>
+  <div class="item"><strong>لغز 70 (Transition):</strong> كتبنا للزر: <code>transition: all 0.3s ease;</code>. ما فائدة هذا السطر عند عمل <code>:hover</code>؟</div>
+  <div class="item"><strong>لغز 71 (Opacity):</strong> ما الفرق بين <code>opacity: 0;</code> و <code>display: none;</code> من حيث التفاعل (النقر بالماوس)؟</div>
+  <div class="item"><strong>لغز 72 (Pointer Events):</strong> يكتب الـ AI على زر معطل (Disabled): <code>pointer-events: none;</code>. ماذا يفعل هذا السطر؟</div>
+  <div class="item"><strong>لغز 73 (User Select):</strong> يكتب الـ AI على الأزرار: <code>user-select: none;</code>. ما وظيفته؟</div>
+  <div class="item"><strong>لغز 74 (Object Fit):</strong> صورة أبعادها غير متناسقة وضعناها داخل مربع 200x200 فظهرت ممطوطة (مشوهة). ما الخاصية التي يضيفها الـ AI لتقص الزوائد وتحافظ على أبعاد الصورة؟</div>
+  <div class="item"><strong>لغز 75 (Aspect Ratio):</strong> يكتب الـ AI للفيديوهات أو البطاقات: <code>aspect-ratio: 16 / 9;</code>. ماذا يضمن هذا السطر؟</div>
+  <div class="item"><strong>لغز 76 (Pseudo-elements):</strong> ما الفرق في الكتابة والاستخدام بين <code>:hover</code> و <code>::before</code>؟</div>
+  <div class="item"><strong>لغز 77 (Pseudo-elements):</strong> إذا كتب الـ AI كوداً لـ <code>::before</code> ونسي كتابة <code>content: "";</code> بداخله، هل سيظهر العنصر؟</div>
+  <div class="item"><strong>لغز 78 (Selectors المتقدمة):</strong> ماذا يستهدف هذا الكود: <code>input[type="email"]</code>؟</div>
+  <div class="item"><strong>لغز 79 (Selectors المتقدمة):</strong> ماذا يستهدف هذا الكود: <code>li:first-child</code>؟</div>
+  <div class="item"><strong>لغز 80 (Selectors المتقدمة):</strong> ماذا يستهدف هذا الكود: <code>tr:nth-child(even)</code>؟</div>
+  <div class="item"><strong>لغز 81 (Selectors المتقدمة):</strong> ماذا يستهدف هذا الكود: <code>button:not(.disabled)</code>؟</div>
+  <div class="item"><strong>لغز 82 (Combinators):</strong> ماذا يستهدف رمز <code>+</code> في: <code>h2 + p</code>؟</div>
+  <div class="item"><strong>لغز 83 (Combinators):</strong> ماذا يستهدف رمز <code>~</code> في: <code>h2 ~ p</code>؟</div>
+  <div class="item"><strong>لغز 84 (Box Shadow):</strong> يكتب الـ AI: <code>box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);</code>. ماذا تعني الأرقام الثلاثة الأولى بالترتيب؟</div>
+  <div class="item"><strong>لغز 85 (Backdrop Filter):</strong> يكتب الـ AI لعمل تأثير الزجاج الضبابي (Glassmorphism): <code>backdrop-filter: blur(10px);</code>. ماذا يفعل؟</div>
+  <div class="item"><strong>لغز 86 (Filter):</strong> كتبنا لصورة: <code>filter: grayscale(100%);</code>. كيف ستظهر الصورة؟</div>
+  <div class="item"><strong>لغز 87 (Linear Gradient):</strong> يكتب الـ AI: <code>background: linear-gradient(to right, red, blue);</code>. كيف ستظهر الخلفية؟</div>
+  <div class="item"><strong>لغز 88 (Min/Max Width):</strong> يكتب الـ AI للحاوية الرئيسية: <code>width: 100%; max-width: 1200px;</code>. لماذا يجمع بين الخاصيتين؟</div>
+  <div class="item"><strong>لغز 89 (Scroll Behavior):</strong> يكتب الـ AI في <code>html { scroll-behavior: smooth; }</code>. ما تأثير هذا السطر عند الضغط على رابط ينقلك لأسفل الصفحة؟</div>
+  <div class="item"><strong>لغز 90 (Accent Color):</strong> يكتب الـ AI: <code>accent-color: green;</code> على عناصر الإدخال. على أي عناصر يظهر تأثيره؟</div>
+  <div class="item"><strong>لغز 91 (Inset):</strong> الكود <code>inset: 10px;</code> هو اختصار لأي خصائص؟</div>
+  <div class="item"><strong>لغز 92 (Logical Properties):</strong> يستخدم الـ AI الحديث <code>margin-inline: auto;</code> بدلاً من <code>margin: 0 auto;</code>. لماذا كلمة <code>inline</code> هنا؟</div>
+  <div class="item"><strong>لغز 93 (Logical Properties):</strong> ما بديل <code>padding-top</code> و <code>padding-bottom</code> معاً في الصيغة الحديثة؟</div>
+  <div class="item"><strong>لغز 94 (Has Selector):</strong> يكتب الـ AI الحديث: <code>.card:has(img)</code>. ماذا يستهدف هذا السطر القوي؟</div>
+  <div class="item"><strong>لغز 95 (Line Height):</strong> يكتب الـ AI للفقرات: <code>line-height: 1.6;</code>. ماذا يغير هذا الرقم؟</div>
+  <div class="item"><strong>لغز 96 (Letter Spacing):</strong> يكتب الـ AI للعناوين الكبيرة: <code>letter-spacing: 2px;</code>. ماذا يفعل؟</div>
+  <div class="item"><strong>لغز 97 (Text Transform):</strong> يكتب الـ AI للأزرار: <code>text-transform: uppercase;</code>. كيف سيعرض كلمة "submit"؟</div>
+  <div class="item"><strong>لغز 98 (Outline vs Border):</strong> يكتب الـ AI: <code>input:focus { outline: none; }</code>. لماذا يزيل الـ <code>outline</code> وما فرقه عن <code>border</code>؟</div>
+  <div class="item"><strong>لغز 99 (Isolation / Stacking):</strong> لماذا يكتب الـ AI أحياناً <code>isolation: isolate;</code> على عنصر أب؟</div>
+  <div class="item"><strong>لغز 100 (Dark Mode):</strong> يكتب الـ AI: <code>@media (prefers-color-scheme: dark)</code>. متى يتم تفعيل التنسيقات الموجودة داخل هذا الكود؟</div>
+
+  <div class="page-break"></div>
+  <h2>إجابات القسمين الأول والثاني (1 - 100)</h2>
+
+  <div class="item answer"><strong>لغز 1 إجابة:</strong> 140px (لأن الـ padding 20 يمين و 20 يسار يُضاف فوق الـ 100px).</div>
+  <div class="item answer"><strong>لغز 2 إجابة:</strong> 100px (لأن border-box تجبر الـ padding والحدود على الانضغاط داخل الـ 100px).</div>
+  <div class="item answer"><strong>لغز 3 إجابة:</strong> أحمر (red)، لأن قوة وتحديد الـ #id أقوى من الـ .class.</div>
+  <div class="item answer"><strong>لغز 4 إجابة:</strong> نعم، لأن المسافة تعني أي <code>&lt;p&gt;</code> حفيد أو ابن داخل <code>&lt;div&gt;</code> مهما كان عمقه.</div>
+  <div class="item answer"><strong>لغز 5 إجابة:</strong> لا، لأن علامة <code>&gt;</code> تعني "الابن المباشر فقط"، وهنا <code>&lt;p&gt;</code> ابن لـ <code>&lt;section&gt;</code> وليس لـ <code>&lt;div&gt;</code> مباشرة.</div>
+  <div class="item answer"><strong>لغز 6 إجابة:</strong> 30px وليس 50px! بسبب ظاهرة (Margin Collapse) حيث يتداخل الهامش الأصغر داخل الأكبر عمودياً.</div>
+  <div class="item answer"><strong>لغز 7 إجابة:</strong> <code>visibility: hidden;</code> تخفي العنصر بصرياً لكن تترك مكانه محجوزاً كمساحة فارغة، بينما <code>display: none;</code> تزيله تماماً كأنه غير موجود.</div>
+  <div class="item answer"><strong>لغز 8 إجابة:</strong> لأن <code>&lt;span&gt;</code> عنصر inline افتراضياً، والعناصر الـ inline لا تقبل width أو height.</div>
+  <div class="item answer"><strong>لغز 9 إجابة:</strong> نعطيه <code>display: inline-block;</code>.</div>
+  <div class="item answer"><strong>لغز 10 إجابة:</strong> أفقياً (بجانب بعضها في صف واحد)، لأن القيمة الافتراضية هي <code>flex-direction: row</code>.</div>
+  <div class="item answer"><strong>لغز 11 إجابة:</strong> <code>justify-content: center;</code>.</div>
+  <div class="item answer"><strong>لغز 12 إجابة:</strong> <code>align-items: center;</code>.</div>
+  <div class="item answer"><strong>لغز 13 إجابة:</strong> <code>justify-content: center;</code> (لأن المحور الرئيسي انقلب وأصبح عمودياً).</div>
+  <div class="item answer"><strong>لغز 14 إجابة:</strong> <code>justify-content: space-between;</code>.</div>
+  <div class="item answer"><strong>لغز 15 إجابة:</strong> <code>flex-wrap: wrap;</code>.</div>
+  <div class="item answer"><strong>لغز 16 إجابة:</strong> <code>padding</code> (لأنها المسافة الداخلية بين المحتوى والإطار).</div>
+  <div class="item answer"><strong>لغز 17 إجابة:</strong> 40px (الترتيب يمشي مع عقارب الساعة: أعلى 10، يمين 20، أسفل 30، يسار 40).</div>
+  <div class="item answer"><strong>لغز 18 إجابة:</strong> 20px (القيمة الأولى للأعلى والأسفل، والثانية لليمين واليسار).</div>
+  <div class="item answer"><strong>لغز 19 إجابة:</strong> <code>margin: 0 auto;</code>.</div>
+  <div class="item answer"><strong>لغز 20 إجابة:</strong> سيذهب إلى أقصى أعلى يمين الشاشة (الصفحة كلها)، لأنه لم يجد أباً يحمل position غير static.</div>
+  <div class="item answer"><strong>لغز 21 إجابة:</strong> سيذهب إلى أقصى أعلى يمين الأب نفسه (يتقيد بحدود الأب).</div>
+  <div class="item answer"><strong>لغز 22 إجابة:</strong> <code>fixed</code> يبقى ثابتاً في مكانه على الشاشة أثناء التمرير (Scroll)، بينما <code>absolute</code> يتحرك ويختفي للأعلى مع الصفحة عند التمرير.</div>
+  <div class="item answer"><strong>لغز 23 إجابة:</strong> الثاني (الذي كُتب لاحقاً في الكود)، لأن z-index لا تعمل إطلاقاً إلا إذا كان للعنصر position (مثل relative, absolute, fixed).</div>
+  <div class="item answer"><strong>لغز 24 إجابة:</strong> عند تمرير مؤشر الماوس فوق الزر.</div>
+  <div class="item answer"><strong>لغز 25 إجابة:</strong> عند النقر داخل حقل الإدخال والبدء بالكتابة فيه (أو التنقل إليه بزر Tab).</div>
+  <div class="item answer"><strong>لغز 26 إجابة:</strong> لا، لأن الشرط يقول "أقصى عرض 600px" (أي للشاشات الأصغر من 600px فقط).</div>
+  <div class="item answer"><strong>لغز 27 إجابة:</strong> لا، لأن الشرط يقول "أقل عرض 768px" (أي للشاشات الأكبر من 768px فقط).</div>
+  <div class="item answer"><strong>لغز 28 إجابة:</strong> المحدد الشامل (Universal Selector)؛ يطبق التنسيق على كل عناصر الصفحة بلا استثناء.</div>
+  <div class="item answer"><strong>لغز 29 إجابة:</strong> <code>.btn.primary.active</code> (بدون أي مسافات بينها).</div>
+  <div class="item answer"><strong>لغز 30 إجابة:</strong> تجمع المحددات لتطبيق نفس التنسيق على كلاس .card وكلاس .box معاً.</div>
+  <div class="item answer"><strong>لغز 31 إجابة:</strong> <code>gap: 20px;</code>.</div>
+  <div class="item answer"><strong>لغز 32 إجابة:</strong> لا، لأن ارتفاع الـ div الفارغ هو 0px افتراضياً.</div>
+  <div class="item answer"><strong>لغز 33 إجابة:</strong> إطار أحمر متقطع (شرطات).</div>
+  <div class="item answer"><strong>لغز 34 إجابة:</strong> 200px (نصف عرض الأب).</div>
+  <div class="item answer"><strong>لغز 35 إجابة:</strong> ثلثي المساحة (66.6%)، لأن مجموع الأجزاء هو 3 (1+2) والثاني يأخذ جزأين.</div>
+  <div class="item answer"><strong>لغز 36 إجابة:</strong> يخفي العنصر الذي يحمل كلاس modal فقط عندما يضاف إليه كلاس hidden (يستخدمه الـ AI لإخفاء النوافذ المنبثقة).</div>
+  <div class="item answer"><strong>لغز 37 إجابة:</strong> أصفر (yellow)، لأن القاعدة الأخيرة تلغي ما قبلها عند تساوي القوة.</div>
+  <div class="item answer"><strong>لغز 38 إجابة:</strong> أحمر (red)، لأن <code>!important</code> تكسر كل قواعد الأولوية وتفرض نفسها بالقوة.</div>
+  <div class="item answer"><strong>لغز 39 إجابة:</strong> لا، خصائص display: flex تؤثر على الأبناء المباشرين فقط.</div>
+  <div class="item answer"><strong>لغز 40 إجابة:</strong> يغطي كامل الشاشة بنسبة 100% (يستخدمه الـ AI كخلفية معتمة خلف النوافذ المنبثقة).</div>
+  <div class="item answer"><strong>لغز 41 إجابة:</strong> بدون مسافة تعني "عنصر واحد يمتلك الكلاسين معاً"، وبمسافة تعني "عنصر يحمل كلاس .red موجود داخل عنصر يحمل كلاس .box".</div>
+  <div class="item answer"><strong>لغز 42 إجابة:</strong> نعم مسموحة؛ وتقوم بسحب العنصر في الاتجاه المعاكس ليتداخل مع العناصر المجاورة له.</div>
+  <div class="item answer"><strong>لغز 43 إجابة:</strong> لا، padding لا يقبل قيماً سالبة أبداً ويتم تجاهلها.</div>
+  <div class="item answer"><strong>لغز 44 إجابة:</strong> <code>align-self: flex-end;</code>.</div>
+  <div class="item answer"><strong>لغز 45 إجابة:</strong> يذهب خلف محتوى الأب أو خلفية الصفحة (تحت العناصر العادية).</div>
+  <div class="item answer"><strong>لغز 46 إجابة:</strong> <code>text-decoration: none;</code>.</div>
+  <div class="item answer"><strong>لغز 47 إجابة:</strong> <code>list-style: none;</code>.</div>
+  <div class="item answer"><strong>لغز 48 إجابة:</strong> <code>cursor: pointer;</code>.</div>
+  <div class="item answer"><strong>لغز 49 إجابة:</strong> دائرة كاملة.</div>
+  <div class="item answer"><strong>لغز 50 إجابة:</strong> شكل بيضاوي (لأن العرض لا يساوي الارتفاع).</div>
+  <div class="item answer"><strong>لغز 51 إجابة:</strong> 3 أعمدة متساوية العرض تماماً.</div>
+  <div class="item answer"><strong>لغز 52 إجابة:</strong> اختصار لـ Fraction (جزء من المساحة المتاحة)؛ أي يقسم المساحة بالتساوي بين الأعمدة.</div>
+  <div class="item answer"><strong>لغز 53 إجابة:</strong> توّسط العنصر أفقياً وعمودياً في نفس الوقت بسطر واحد.</div>
+  <div class="item answer"><strong>لغز 54 إجابة:</strong> سيمتد ليأخذ مساحة عمودين معاً.</div>
+  <div class="item answer"><strong>لغز 55 إجابة:</strong> 24px (لأن 1.5 × 16 = 24، وrem تعتمد دائماً على خط العنصر الجذري html).</div>
+  <div class="item answer"><strong>لغز 56 إجابة:</strong> 40px (لأن 2 × 20 = 40، وem تعتمد على خط العنصر الأب المباشر أو العنصر نفسه).</div>
+  <div class="item answer"><strong>لغز 57 إجابة:</strong> 100% من ارتفاع شاشة الجهاز الظاهرة أمام المستخدم (Viewport Height).</div>
+  <div class="item answer"><strong>لغز 58 إجابة:</strong> يجعل عرض العنصر مساوياً لعرض الأب بالكامل مطروحاً منه 80px ثابتة.</div>
+  <div class="item answer"><strong>لغز 59 إجابة:</strong> تجعل الخط مرناً يتغير حجمه مع عرض الشاشة (4vw)، بشرط ألا يقل عن 16px في الهواتف وألا يزيد عن 32px في الشاشات الضخمة.</div>
+  <div class="item answer"><strong>لغز 60 إجابة:</strong> يمثل العنصر الجذري للصفحة (<code>&lt;html&gt;</code>)؛ نعرف فيه المتغيرات لتكون متاحة لكل ملف الـ CSS.</div>
+  <div class="item answer"><strong>لغز 61 إجابة:</strong> <code>background-color: var(--primary);</code>.</div>
+  <div class="item answer"><strong>لغز 62 إجابة:</strong> سيتم قص النص الزائد وإخفاؤه تماماً ولن يظهر خارج الصندوق.</div>
+  <div class="item answer"><strong>لغز 63 إجابة:</strong> سيظهر شريط تمرير عمودي (Scrollbar) داخل الصندوق فقط عند الحاجة لقراءة النص الزائد.</div>
+  <div class="item answer"><strong>لغز 64 إجابة:</strong> سيظهر النص في سطر واحد ويُقص في نهايته وتُوضع ثلاث نقاط ... تلقائياً.</div>
+  <div class="item answer"><strong>لغز 65 إجابة:</strong> sticky يتصرف كعنصر عادي حتى يصل التمرير إلى top: 0 فيلتصق بأعلى الشاشة، بينما fixed ملتصق بالشاشة منذ اللحظة الأولى.</div>
+  <div class="item answer"><strong>لغز 66 إجابة:</strong> سيتحرك للأعلى بمقدار 10px (بصرياً فقط دون أن يزيح العناصر الأخرى من مكانها).</div>
+  <div class="item answer"><strong>لغز 67 إجابة:</strong> سيكبر حجم العنصر بنسبة 10% (تأثير تكبير ناعم شائع جداً في البطاقات).</div>
+  <div class="item answer"><strong>لغز 68 إجابة:</strong> سيدور العنصر بزاوية 45 درجة مع عقارب الساعة.</div>
+  <div class="item answer"><strong>لغز 69 إجابة:</strong> لأن top: 50%; left: 50%; تضع الزاوية العلوية اليسرى للعنصر في المنتصف، وtranslate(-50%, -50%) تسحبه للخلف بمقدار نصف عرضه ونصف ارتفاعه ليصبح مركزه هو المنتصف الحقيقي.</div>
+  <div class="item answer"><strong>لغز 70 إجابة:</strong> يجعل التغيير (مثل تغير اللون أو الحجم) يحدث بنعومة خلال 0.3 ثانية بدلاً من أن يحدث فجأة وبشكل حاد.</div>
+  <div class="item answer"><strong>لغز 71 إجابة:</strong> العنصر الذي له opacity: 0 يصبح شفافاً تماماً لكنه لا يزال موجوداً ويمكن النقر عليه، بينما display: none يلغيه تماماً.</div>
+  <div class="item answer"><strong>لغز 72 إجابة:</strong> يجعل العنصر يتجاهل نقرات الماوس تماماً كأنه غير موجود أمام المؤشر.</div>
+  <div class="item answer"><strong>لغز 73 إجابة:</strong> يمنع المستخدم من تظليل أو تحديد النص الموجود داخل الزر عند النقر المتكرر عليه.</div>
+  <div class="item answer"><strong>لغز 74 إجابة:</strong> <code>object-fit: cover;</code>.</div>
+  <div class="item answer"><strong>لغز 75 إجابة:</strong> يحافظ على نسبة العرض إلى الارتفاع (16:9) مهما تغير حجم الشاشة.</div>
+  <div class="item answer"><strong>لغز 76 إجابة:</strong> <code>:hover</code> يصف حالة للعنصر، بينما <code>::before</code> ينشئ عنصراً وهمياً جديداً قبل محتوى العنصر الأصلي (مثل إضافة أيقونة أو خط تزييني).</div>
+  <div class="item answer"><strong>لغز 77 إجابة:</strong> لا، لن يظهر أبداً؛ خاصية content (حتى لو كانت فارغة "") إجبارية لظهور <code>::before</code> و <code>::after</code>.</div>
+  <div class="item answer"><strong>لغز 78 إجابة:</strong> يستهدف فقط حقول الإدخال التي نوعها بريد إلكتروني (<code>type="email"</code>).</div>
+  <div class="item answer"><strong>لغز 79 إجابة:</strong> يستهدف أول عنصر <code>&lt;li&gt;</code> داخل القائمة فقط.</div>
+  <div class="item answer"><strong>لغز 80 إجابة:</strong> يستهدف الصفوف الزوجية في الجدول (رقم 2، 4، 6...) لتلوينها بلون مختلف وتسهيل القراءة.</div>
+  <div class="item answer"><strong>لغز 81 إجابة:</strong> يستهدف كل الأزرار ما عدا الأزرار التي تحمل كلاس .disabled.</div>
+  <div class="item answer"><strong>لغز 82 إجابة:</strong> يستهدف أول فقرة <code>&lt;p&gt;</code> تأتي مباشرة بعد عنوان <code>&lt;h2&gt;</code> (الأخ المجاور).</div>
+  <div class="item answer"><strong>لغز 83 إجابة:</strong> يستهدف كل الفقرات <code>&lt;p&gt;</code> التي تأتي بعد عنوان <code>&lt;h2&gt;</code> في نفس المستوى.</div>
+  <div class="item answer"><strong>لغز 84 إجابة:</strong> الإزاحة الأفقية (0)، الإزاحة العمودية (4px للأسفل)، ودرجة التمويه والنعومة (6px blur).</div>
+  <div class="item answer"><strong>لغز 85 إجابة:</strong> يطبق ضبابية (Blur) على الخلفية الموجودة خلف العنصر وليس على العنصر نفسه.</div>
+  <div class="item answer"><strong>لغز 86 إجابة:</strong> ستتحول الصورة بالكامل إلى اللونين الأبيض والأسود.</div>
+  <div class="item answer"><strong>لغز 87 إجابة:</strong> تدرج لوني ناعم يبدأ بالأحمر من اليسار وينتهي بالأزرق في اليمين.</div>
+  <div class="item answer"><strong>لغز 88 إجابة:</strong> لكي يأخذ العنصر عرض الشاشة بالكامل في الهواتف (100%)، لكنه يتوقف عن التمدد عند 1200px في الشاشات الضخمة ليحافظ على تناسقه.</div>
+  <div class="item answer"><strong>لغز 89 إجابة:</strong> يجعل الصفحة تنزلق بنعومة وسلاسة عند الانتقال لقسم داخلي بدلاً من القفز المفاجئ.</div>
+  <div class="item answer"><strong>لغز 90 إجابة:</strong> يغير اللون الافتراضي الأزرق لصناديق الاختيار (checkbox) وأزرار الراديو (radio) إلى اللون الأخضر.</div>
+  <div class="item answer"><strong>لغز 91 إجابة:</strong> اختصار لـ <code>top: 10px; right: 10px; bottom: 10px; left: 10px;</code>.</div>
+  <div class="item answer"><strong>لغز 92 إجابة:</strong> تعني الهوامش على المحور الأفقي (اليمين واليسار) وتتكيف تلقائياً مع اتجاه اللغة (عربي RTL أو إنجليزي LTR).</div>
+  <div class="item answer"><strong>لغز 93 إجابة:</strong> <code>padding-block</code>.</div>
+  <div class="item answer"><strong>لغز 94 إجابة:</strong> يستهدف الكارت (.card) فقط إذا كان يحتوي بداخله على صورة <code>&lt;img&gt;</code> (الأب الذي يمتلك ابناً معيناً).</div>
+  <div class="item answer"><strong>لغز 95 إجابة:</strong> المسافة العمودية بين أسطر النص (تزيد من راحة القراءة).</div>
+  <div class="item answer"><strong>لغز 96 إجابة:</strong> يزيد المسافة الأفقية بين الحروف وبعضها داخل الكلمة.</div>
+  <div class="item answer"><strong>لغز 97 إجابة:</strong> يحولها تلقائياً إلى حروف كبيرة "SUBMIT" دون تعديل نص الـ HTML.</div>
+  <div class="item answer"><strong>لغز 98 إجابة:</strong> يزيل الإطار الافتراضي الذي يضعه المتصفح عند التركيز على الحقل؛ وفرق outline عن border أنه يُرسم خارج العنصر ولا يأخذ مساحة من حجمه.</div>
+  <div class="item answer"><strong>لغز 99 إجابة:</strong> لإنشاء بيئة طبقات مستقلة (Stacking Context) تمنع z-index الخاص بالأبناء من التداخل مع عناصر خارج الأب.</div>
+  <div class="item answer"><strong>لغز 100 إجابة:</strong> يتم تفعيله تلقائياً إذا كان المستخدم قد فعّل الوضع الليلي (Dark Mode) في إعدادات نظام جهازه أو متصفحه.</div>
+
+  <div class="page-break"></div>
+  <h2>الجزء الأول: الدرس السريع (50 مفهوماً وحيلة CSS يكتبها الذكاء الاصطناعي)</h2>
+
+  <h3>1. نظام الشبكة (CSS Grid)</h3>
+  <div class="item"><strong>1. <code>display: grid</code>:</strong> يحول العنصر إلى شبكة لتوزيع العناصر في صفوف وأعمدة معاً.</div>
+  <div class="item"><strong>2. <code>grid-template-columns: repeat(3, 1fr)</code>:</strong> يقسم الشبكة إلى 3 أعمدة متساوية العرض تماماً.</div>
+  <div class="item"><strong>3. وحدة <code>1fr</code>:</strong> تعني Fraction (جزء واحد من المساحة المتاحة).</div>
+  <div class="item"><strong>4. <code>place-items: center</code>:</strong> اختصار سحري يوسط العنصر أفقياً وعمودياً داخل الخلية في سطر واحد.</div>
+  <div class="item"><strong>5. <code>grid-column: span 2</code>:</strong> يجعل العنصر يتمدد ليأخذ مساحة عمودين بدلاً من عمود واحد.</div>
+
+  <h3>2. الوحدات المرنة والحسابات (Units &amp; Math)</h3>
+  <div class="item"><strong>6. وحدة <code>rem</code>:</strong> تعتمد على حجم خط الصفحة الأساسي (html) الذي يكون غالباً 16px (فمثلاً 2rem = 32px).</div>
+  <div class="item"><strong>7. وحدة <code>em</code>:</strong> تعتمد على حجم خط العنصر الأب المباشر أو العنصر نفسه.</div>
+  <div class="item"><strong>8. وحدات <code>vh</code> و <code>vw</code>:</strong> تعني نسبة من ارتفاع الشاشة (100vh = ملء طول الشاشة) أو عرضها (100vw = ملء عرض الشاشة).</div>
+  <div class="item"><strong>9. دالة <code>calc()</code>:</strong> تسمح بإجراء عمليات حسابية داخل CSS مثل <code>width: calc(100% - 50px)</code>.</div>
+  <div class="item"><strong>10. دالة <code>clamp(min, val, max)</code>:</strong> تجعل الحجم مرناً بين حد أدنى وحد أقصى (مثال: <code>clamp(16px, 4vw, 32px)</code>).</div>
+
+  <h3>3. المتغيرات والتحكم في الفائض (Variables &amp; Overflow)</h3>
+  <div class="item"><strong>11. <code>:root</code>:</strong> يمثل العنصر الجذري للصفحة (<code>&lt;html&gt;</code>) وتُكتب بداخله المتغيرات العامة.</div>
+  <div class="item"><strong>12. المتغيرات (<code>--main-color</code>):</strong> تُعرف بشرطتين <code>--</code> وتُستدعى عبر <code>var(--main-color)</code>.</div>
+  <div class="item"><strong>13. <code>overflow: hidden</code>:</strong> يقص ويخفي أي محتوى أو نص يخرج خارج حدود الصندوق.</div>
+  <div class="item"><strong>14. <code>overflow-y: auto</code>:</strong> يضيف شريط تمرير (Scrollbar) عمودي تلقائياً إذا زاد المحتوى عن ارتفاع الصندوق.</div>
+  <div class="item"><strong>15. قص النص بنقاط (...):</strong> يتم بدمج 3 خصائص: <code>white-space: nowrap</code> + <code>overflow: hidden</code> + <code>text-overflow: ellipsis</code>.</div>
+
+  <h3>4. التموضع المتقدم والتحريك (Sticky, Transform, Transition)</h3>
+  <div class="item"><strong>16. <code>position: sticky; top: 0</code>:</strong> يجعل العنصر يتحرك مع الصفحة حتى يصل لأعلى الشاشة فيلتصق بها.</div>
+  <div class="item"><strong>17. <code>transform: translate(x, y)</code>:</strong> يحرك العنصر بصرياً من مكانه دون أن يؤثر على أماكن العناصر المجاورة.</div>
+  <div class="item"><strong>18. <code>transform: scale(1.1)</code>:</strong> يكبر حجم العنصر بنسبة 10% (أو يصغره إذا كان الرقم أقل من 1).</div>
+  <div class="item"><strong>19. <code>transform: rotate(45deg)</code>:</strong> يدور العنصر بزاوية محددة بالدرجات.</div>
+  <div class="item"><strong>20. <code>transition: all 0.3s ease</code>:</strong> يجعل أي تغيير يحدث للعنصر (مثل اللون أو الحجم) يتم بنعومة خلال 0.3 ثانية بدلاً من أن يحدث فجأة.</div>
+
+  <h3>5. الشفافية، التفاعل، والوسائط (Opacity, Events, Media)</h3>
+  <div class="item"><strong>21. <code>opacity: 0</code>:</strong> يجعل العنصر شفافاً تماماً، لكنه يظل موجوداً في مكانه ويمكن النقر عليه (عكس display: none).</div>
+  <div class="item"><strong>22. <code>pointer-events: none</code>:</strong> يجعل العنصر يتجاهل نقرات الماوس تماماً كأنه غير موجود أمام المؤشر.</div>
+  <div class="item"><strong>23. <code>user-select: none</code>:</strong> يمنع المستخدم من تظليل أو نسخ النص الموجود داخل العنصر.</div>
+  <div class="item"><strong>24. <code>object-fit: cover</code>:</strong> يمنع تشوه الصور ومطّها داخل الصناديق عبر قص الزوائد مع الحفاظ على الأبعاد.</div>
+  <div class="item"><strong>25. <code>aspect-ratio: 16 / 9</code>:</strong> يجبر العنصر أو الفيديو على الحفاظ على نسبة عرض إلى ارتفاع ثابتة مهما تغير حجم الشاشة.</div>
+
+  <h3>6. العناصر الوهمية والمحددات الذكية (Pseudo-elements &amp; Selectors)</h3>
+  <div class="item"><strong>26. <code>::before</code> و <code>::after</code>:</strong> تنشئ عناصر تزيينية وهمية قبل أو بعد محتوى العنصر الأصلي.</div>
+  <div class="item"><strong>27. خاصية <code>content: ""</code>:</strong> شرط إجباري داخل <code>::before</code> و <code>::after</code> لكي يظهرا على الشاشة.</div>
+  <div class="item"><strong>28. <code>input[type="email"]</code>:</strong> يستهدف العناصر بناءً على نوع السمة (Attribute) الخاصة بها.</div>
+  <div class="item"><strong>29. <code>:first-child</code> و <code>:last-child</code>:</strong> تستهدف أول عنصر ابن أو آخر عنصر ابن داخل الأب.</div>
+  <div class="item"><strong>30. <code>:nth-child(even / odd)</code>:</strong> تستهدف الأبناء ذوي الترتيب الزوجي أو الفردي (مفيدة لتلوين صفوف الجداول).</div>
+  <div class="item"><strong>31. <code>:not(.disabled)</code>:</strong> تستهدف جميع العناصر باستثناء التي تحمل الكلاس المحدد.</div>
+  <div class="item"><strong>32. علامة <code>+</code> (<code>h2 + p</code>):</strong> تستهدف العنصر الأخ الذي يأتي مباشرة بعد العنصر الأول.</div>
+  <div class="item"><strong>33. علامة <code>~</code> (<code>h2 ~ p</code>):</strong> تستهدف جميع العناصر الإخوة التي تأتي بعد العنصر الأول.</div>
+  <div class="item"><strong>34. محدد <code>:has()</code> (<code>.card:has(img)</code>):</strong> يستهدف الأب فقط إذا كان يحتوي بداخله على ابن معين.</div>
+
+  <h3>7. الظلال، الفلاتر، والخلفيات (Shadows, Filters, Gradients)</h3>
+  <div class="item"><strong>35. <code>box-shadow: x y blur color</code>:</strong> يضيف ظلاً للصندوق (إزاحة أفقية، إزاحة عمودية، درجة التمويه، اللون).</div>
+  <div class="item"><strong>36. <code>backdrop-filter: blur(10px)</code>:</strong> يطبق ضبابية (تأثير الزجاج) على الخلفية الموجودة خلف العنصر.</div>
+  <div class="item"><strong>37. <code>filter: grayscale(100%)</code>:</strong> يطبق فلاتر لونية على العنصر نفسه (مثل تحويل الصورة للأبيض والأسود).</div>
+  <div class="item"><strong>38. <code>linear-gradient(...)</code>:</strong> ينشئ خلفية ذات تدرج لوني ناعم بين لونين أو أكثر.</div>
+
+  <h3>8. خصائص التخطيط، النصوص، والتجربة الحديثة</h3>
+  <div class="item"><strong>39. <code>max-width: 1200px</code> مع <code>width: 100%</code>:</strong> يجعل العنصر مرناً في الهواتف ويتوقف عن التمدد في الشاشات الضخمة.</div>
+  <div class="item"><strong>40. <code>scroll-behavior: smooth</code>:</strong> يجعل الانتقال بالروابط الداخلية في الصفحة ينزلق بنعومة.</div>
+  <div class="item"><strong>41. <code>accent-color</code>:</strong> يغير اللون الافتراضي لصناديق الاختيار (checkbox) وأزرار الراديو (radio).</div>
+  <div class="item"><strong>42. <code>inset: 0</code>:</strong> اختصار يجمع <code>top: 0; right: 0; bottom: 0; left: 0;</code>.</div>
+  <div class="item"><strong>43. <code>margin-inline: auto</code>:</strong> البديل الحديث لـ <code>margin: 0 auto</code> (يتحكم في الهوامش الأفقية حسب اتجاه اللغة).</div>
+  <div class="item"><strong>44. <code>padding-block</code>:</strong> يتحكم في الهوامش الداخلية العمودية (الأعلى والأسفل معاً).</div>
+  <div class="item"><strong>45. <code>line-height</code>:</strong> يحدد المسافة العمودية بين أسطر الفقرة لراحة القراءة.</div>
+  <div class="item"><strong>46. <code>letter-spacing</code>:</strong> يحدد المسافة الأفقية بين حروف الكلمة.</div>
+  <div class="item"><strong>47. <code>text-transform: uppercase</code>:</strong> يحول الحروف الإنجليزية إلى حروف كبيرة (Capital) بصرياً.</div>
+  <div class="item"><strong>48. <code>outline: none</code>:</strong> يزيل الإطار الخارجي الافتراضي الذي يظهر عند الضغط على حقول الإدخال (والـ outline لا يأخذ مساحة من حجم العنصر عكس border).</div>
+  <div class="item"><strong>49. <code>isolation: isolate</code>:</strong> ينشئ طبقة معزولة للأب تمنع z-index الخاص بالأبناء من التداخل مع عناصر خارج الأب.</div>
+  <div class="item"><strong>50. <code>@media (prefers-color-scheme: dark)</code>:</strong> يطبق تنسيقات الوضع الليلي تلقائياً إذا كان جهاز المستخدم مفعلاً للوضع الليلي.</div>
+
+  <div class="page-break"></div>
+  <h2>الجزء الثاني: 50 لغزاً تطبيقياً على الدرس</h2>
+
+  <div class="item"><strong>لغز 1:</strong> لديك كود: <code>display: grid; grid-template-columns: repeat(4, 1fr);</code>. كم عموداً سينتج؟</div>
+  <div class="item"><strong>لغز 2:</strong> كيف توّسط عنصراً أفقياً وعمودياً داخل حاوية <code>display: grid</code> باستخدام خاصية واحدة فقط؟</div>
+  <div class="item"><strong>لغز 3:</strong> في شبكة من 3 أعمدة، نريد لعنصر العنوان أن يمتد على عرض الشبكة بالكامل. ماذا نكتب؟</div>
+  <div class="item"><strong>لغز 4:</strong> إذا كان حجم خط العنصر الجذري html هو <code>10px</code>، فكم يساوي <code>3rem</code> بالبكسل؟</div>
+  <div class="item"><strong>لغز 5:</strong> عنصر أب حجم خطه <code>20px</code>، والابن له <code>font-size: 1.5em;</code>. كم حجم خط الابن بالبكسل؟</div>
+  <div class="item"><strong>لغز 6:</strong> نريد قسم البداية في الموقع أن يأخذ طول شاشة المستخدم بالكامل مهما كان حجم جهازه. ما القيمة؟</div>
+  <div class="item"><strong>لغز 7:</strong> لديك شريط جانبي ثابت عرضه <code>250px</code>، وتريد للمحتوى المجاور له أن يأخذ باقي عرض الشاشة بالضبط. كيف تكتب ذلك بـ <code>calc</code>؟</div>
+  <div class="item"><strong>لغز 8:</strong> لديك كود: <code>font-size: clamp(14px, 3vw, 24px);</code>. إذا كانت قيمة <code>3vw</code> على هاتف صغير تساوي <code>10px</code>، فكم سيكون حجم الخط الفعلي؟</div>
+  <div class="item"><strong>لغز 9:</strong> أين يكتب المبرمجون المتغيرات العامة للموقع لكي تعمل في كل الصفحات؟</div>
+  <div class="item"><strong>لغز 10:</strong> إذا عرّفنا متغيراً باسم <code>--bg-dark: #111;</code>، فكيف نستدعيه في خاصية الخلفية؟</div>
+  <div class="item"><strong>لغز 11:</strong> صندوق ارتفاعه <code>50px</code> وبداخله نص من 10 أسطر. كتبنا <code>overflow: hidden;</code>. أين ذهبت الأسطر الزائدة؟</div>
+  <div class="item"><strong>لغز 12:</strong> ما الخاصية التي تجعل شريط التمرير (Scrollbar) يظهر داخل الصندوق فقط إذا زاد المحتوى عن طوله؟</div>
+  <div class="item"><strong>لغز 13:</strong> ما هي الخاصية الثالثة الناقصة لإظهار النقاط الثلاث <code>...</code> عند قص النص الطويل: <code>white-space: nowrap; overflow: hidden; + (.........)</code>؟</div>
+  <div class="item"><strong>لغز 14:</strong> عنصر له <code>position: sticky; top: 20px;</code>. متى يتوقف هذا العنصر عن الحركة ويثبت في مكانه أثناء التمرير؟</div>
+  <div class="item"><strong>لغز 15:</strong> كتبنا لزر عند تمرير الماوس: <code>transform: translateY(-5px);</code>. هل سيدفع هذا التحرك العناصر الموجودة فوقه؟</div>
+  <div class="item"><strong>لغز 16:</strong> كتبنا لصورة عند الوقوف عليها: <code>transform: scale(0.9);</code>. هل ستكبر الصورة أم ستصغر؟</div>
+  <div class="item"><strong>لغز 17:</strong> كيف ندير أيقونة سهم بمقدار 180 درجة لتشير للأسفل بدلاً من الأعلى؟</div>
+  <div class="item"><strong>لغز 18:</strong> لماذا نستخدم <code>transform: translate(-50%, -50%)</code> مع <code>top: 50%; left: 50%</code> لتوسيط عنصر مطلق؟</div>
+  <div class="item"><strong>لغز 19:</strong> إذا أردنا أن يتغير لون خلفية الزر بنعومة خلال نصف ثانية عند تمرير الماوس، ماذا نكتب؟</div>
+  <div class="item"><strong>لغز 20:</strong> لديك زر مخفي بـ <code>opacity: 0;</code> وموضوع فوق رابط مهم. ماذا سيحدث إذا ضغط المستخدم في مكان الزر المخفي؟</div>
+  <div class="item"><strong>لغز 21:</strong> كيف نمنع العنصر المخفي بـ <code>opacity: 0</code> من استقبال نقرات الماوس؟</div>
+  <div class="item"><strong>لغز 22:</strong> كيف نمنع المستخدم من تحديد وتظليل النص داخل أيقونة أو زر بالماوس؟</div>
+  <div class="item"><strong>لغز 23:</strong> صورة شخصية وضعناها داخل دائرة 100x100 فظهر الوجه مضغوطاً ومشوهاً. ما الخاصية التي تصلحها فوراً؟</div>
+  <div class="item"><strong>لغز 24:</strong> نريد وضع مشغل فيديو يحافظ دائماً على نسبة العرض للطول <code>16 / 9</code> على كل الشاشات. ما الخاصية؟</div>
+  <div class="item"><strong>لغز 25:</strong> كتب الـ AI كوداً لوضع نقطة حمراء قبل العنوان: <code>h1::before { width: 10px; height: 10px; background: red; }</code> لكنها لم تظهر! ما السطر الناقص؟</div>
+  <div class="item"><strong>لغز 26:</strong> كيف نستهدف جميع حقول الإدخال التي نوعها <code>password</code> فقط دون لمس حقول <code>text</code>؟</div>
+  <div class="item"><strong>لغز 27:</strong> لدينا قائمة من 5 عناصر <code>&lt;li&gt;</code>. كيف نغير لون خلفية العنصر الأخير فقط؟</div>
+  <div class="item"><strong>لغز 28:</strong> كيف نلون الصفوف الفردية (1، 3، 5...) في جدول بيانات بلون رمادي فاتح؟</div>
+  <div class="item"><strong>لغز 29:</strong> لدينا 10 بطاقات <code>.card</code>، نريد تطبيق إطار أحمر على جميع البطاقات ما عدا البطاقة التي تحمل كلاس <code>.featured</code>. كيف نكتب المحدد؟</div>
+  <div class="item"><strong>لغز 30:</strong> لديك كود: <code>h3 + p { color: blue; }</code>، وتحت <code>&lt;h3&gt;</code> يوجد <code>&lt;div&gt;</code> ثم <code>&lt;p&gt;</code>. هل سيتلون <code>&lt;p&gt;</code> بالأزرق؟</div>
+  <div class="item"><strong>لغز 31:</strong> في اللغز السابق، إذا استبدلنا <code>+</code> بـ <code>~</code> (<code>h3 ~ p</code>) وكان <code>&lt;p&gt;</code> أخاً لـ <code>&lt;h3&gt;</code> (في نفس المستوى)، هل سيتلون بالأزرق؟</div>
+  <div class="item"><strong>لغز 32:</strong> ما وظيفة المحدد <code>.box:has(input:focus)</code>؟</div>
+  <div class="item"><strong>لغز 33:</strong> في كود <code>box-shadow: 10px 5px 15px black;</code>، إلى أي اتجاه يتجه الظل أفقياً وعمودياً؟</div>
+  <div class="item"><strong>لغز 34:</strong> نريد عمل شريط علوي (Navbar) شبه شفاف يظهر ما تحته بشكل ضبابي (Blur). نستخدم <code>filter</code> أم <code>backdrop-filter</code>؟</div>
+  <div class="item"><strong>لغز 35:</strong> كيف نجعل صورة ملونة تتحول للأبيض والأسود، وعند مرور الماوس تعود لألوانها الطبيعية؟</div>
+  <div class="item"><strong>لغز 36:</strong> ماذا ينتج عن الكود: <code>background: linear-gradient(to bottom, #000, #fff);</code>؟</div>
+  <div class="item"><strong>لغز 37:</strong> ما المشكلة إذا كتبنا للحاوية <code>width: 1200px;</code> فقط دون استخدام <code>width: 100%; max-width: 1200px;</code>؟</div>
+  <div class="item"><strong>لغز 38:</strong> ما الخاصية التي تجعل زر "العودة للأعلى" يصعد بالصفحة بسلاسة ونعومة؟</div>
+  <div class="item"><strong>لغز 39:</strong> نريد تغيير لون علامة الصح داخل checkbox إلى اللون البنفسجي دون بناء تصميم معقد من الصفر. ما الخاصية؟</div>
+  <div class="item"><strong>لغز 40:</strong> ما البديل المختصر من كلمة واحدة لكتابة: <code>top: 0; bottom: 0; left: 0; right: 0;</code>؟</div>
+  <div class="item"><strong>لغز 41:</strong> إذا كان موقعك يدعم العربية (RTL) والإنجليزية (LTR)، لماذا يفضل الـ AI <code>margin-inline-start: 10px</code> بدلاً من <code>margin-left: 10px</code>؟</div>
+  <div class="item"><strong>لغز 42:</strong> ما الخاصية الحديثة التي تعطي <code>padding</code> للأعلى والأسفل معاً دون لمس اليمين واليسار؟</div>
+  <div class="item"><strong>لغز 43:</strong> نص الفقرة متلاصق عمودياً وصعب القراءة. ما الخاصية التي تباعد بين الأسطر؟</div>
+  <div class="item"><strong>لغز 44:</strong> نريد تباعداً أنيقاً بين حروف كلمة "WELCOME" في الشعار. ما الخاصية؟</div>
+  <div class="item"><strong>لغز 45:</strong> كتب المستخدم اسمه بحروف صغيرة "ali" في حقل الإدخال، ونريد عرضه بحروف كبيرة "ALI" دون تعديل النص الأصلي. ما الخاصية؟</div>
+  <div class="item"><strong>لغز 46:</strong> لماذا يفضل المبرمجون استبدال <code>outline</code> الافتراضي في حقول الإدخال بـ <code>border</code> أو <code>box-shadow</code> عند الـ <code>:focus</code>؟</div>
+  <div class="item"><strong>لغز 47:</strong> لديك عنصر بـ <code>border: 5px solid red</code> وعنصر آخر بـ <code>outline: 5px solid red</code>. أيهما يزيد من المساحة المحجوزة للعنصر في الصفحة؟</div>
+  <div class="item"><strong>لغز 48:</strong> وضعنا <code>z-index: 9999</code> لنافذة منبثقة داخل قسم معين، لكنها لا تزال تظهر خلف شريط التنقل! ما الخاصية التي قد تحل مشكلة تداخل الطبقات في الأب؟</div>
+  <div class="item"><strong>لغز 49:</strong> كيف نكتشف في CSS أن المستخدم يفضل الوضع الليلي (Dark Mode) في هاتفه لنغير ألوان الموقع تلقائياً؟</div>
+  <div class="item"><strong>لغز 50 (تحدي التجميع):</strong> اقرأ هذا الكود الذي كتبه AI واشرح ماذا يفعل بالضبط:
+<pre>.card {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+}</pre>
+  </div>
+
+  <div class="page-break"></div>
+  <h2>الجزء الثالث: إجابات الألغاز الـ 50 التطبيقية</h2>
+
+  <div class="item answer"><strong>لغز 1 إجابة:</strong> 4 أعمدة متساوية العرض.</div>
+  <div class="item answer"><strong>لغز 2 إجابة:</strong> <code>place-items: center;</code>.</div>
+  <div class="item answer"><strong>لغز 3 إجابة:</strong> <code>grid-column: span 3;</code> (أو <code>grid-column: 1 / -1;</code>).</div>
+  <div class="item answer"><strong>لغز 4 إجابة:</strong> 30px (3 × 10px).</div>
+  <div class="item answer"><strong>لغز 5 إجابة:</strong> 30px (1.5 × 20px).</div>
+  <div class="item answer"><strong>لغز 6 إجابة:</strong> <code>height: 100vh;</code>.</div>
+  <div class="item answer"><strong>لغز 7 إجابة:</strong> <code>width: calc(100% - 250px);</code>.</div>
+  <div class="item answer"><strong>لغز 8 إجابة:</strong> 14px (لأن 14px هو الحد الأدنى المسموح به في الدالة).</div>
+  <div class="item answer"><strong>لغز 9 إجابة:</strong> داخل المحدد <code>:root { ... }</code>.</div>
+  <div class="item answer"><strong>لغز 10 إجابة:</strong> <code>background-color: var(--bg-dark);</code>.</div>
+  <div class="item answer"><strong>لغز 11 إجابة:</strong> تم قصها وإخفاؤها تماماً ولن تظهر للمستخدم.</div>
+  <div class="item answer"><strong>لغز 12 إجابة:</strong> <code>overflow-y: auto;</code>.</div>
+  <div class="item answer"><strong>لغز 13 إجابة:</strong> <code>text-overflow: ellipsis;</code>.</div>
+  <div class="item answer"><strong>لغز 14 إجابة:</strong> عندما تصل المسافة بينه وبين أعلى الشاشة أثناء التمرير إلى 20px.</div>
+  <div class="item answer"><strong>لغز 15 إجابة:</strong> لا، transform يحرك العنصر بصرياً فقط دون التأثير على هندسة ومكان العناصر الأخرى.</div>
+  <div class="item answer"><strong>لغز 16 إجابة:</strong> ستصغر بنسبة 10% (لتصبح 90% من حجمها الأصلي).</div>
+  <div class="item answer"><strong>لغز 17 إجابة:</strong> <code>transform: rotate(180deg);</code>.</div>
+  <div class="item answer"><strong>لغز 18 إجابة:</strong> لأن top: 50%; left: 50% تضع الزاوية العلوية اليسرى للعنصر في منتصف الشاشة، وtranslate(-50%, -50%) تعيد سحب العنصر بمقدار نصف عرضه ونصف ارتفاعه ليصبح مركزه في المنتصف تماماً.</div>
+  <div class="item answer"><strong>لغز 19 إجابة:</strong> <code>transition: background-color 0.5s ease;</code> (أو <code>transition: all 0.5s ease;</code>).</div>
+  <div class="item answer"><strong>لغز 20 إجابة:</strong> سيضغط المستخدم على الزر المخفي ولن يصل للرابط الذي تحته!</div>
+  <div class="item answer"><strong>لغز 21 إجابة:</strong> نضيف للزر المخفي <code>pointer-events: none;</code>.</div>
+  <div class="item answer"><strong>لغز 22 إجابة:</strong> <code>user-select: none;</code>.</div>
+  <div class="item answer"><strong>لغز 23 إجابة:</strong> <code>object-fit: cover;</code>.</div>
+  <div class="item answer"><strong>لغز 24 إجابة:</strong> <code>aspect-ratio: 16 / 9;</code>.</div>
+  <div class="item answer"><strong>لغز 25 إجابة:</strong> سطر <code>content: "";</code> (بدونه لا يتم إنشاء العنصر الوهمي أبداً).</div>
+  <div class="item answer"><strong>لغز 26 إجابة:</strong> <code>input[type="password"]</code>.</div>
+  <div class="item answer"><strong>لغز 27 إجابة:</strong> <code>li:last-child</code>.</div>
+  <div class="item answer"><strong>لغز 28 إجابة:</strong> <code>tr:nth-child(odd)</code>.</div>
+  <div class="item answer"><strong>لغز 29 إجابة:</strong> <code>.card:not(.featured)</code>.</div>
+  <div class="item answer"><strong>لغز 30 إجابة:</strong> لا، لأن علامة + تشترط أن يكون <code>&lt;p&gt;</code> هو الأخ المباشر الذي يلي <code>&lt;h3&gt;</code> دون وجود <code>&lt;div&gt;</code> بينهما.</div>
+  <div class="item answer"><strong>لغز 31 إجابة:</strong> نعم، لأن علامة ~ تستهدف أي أخ يأتي بعد <code>&lt;h3&gt;</code> حتى لو لم يكن ملاصقاً له مباشرة.</div>
+  <div class="item answer"><strong>لغز 32 إجابة:</strong> يغير تنسيق الصندوق .box بالكامل عندما يقوم المستخدم بالضغط والكتابة داخل حقل الإدخال الموجود بداخله.</div>
+  <div class="item answer"><strong>لغز 33 إجابة:</strong> 10 بكسل لليمين، و5 بكسل للأسفل، مع درجة تمويه 15 بكسل.</div>
+  <div class="item answer"><strong>لغز 34 إجابة:</strong> <code>backdrop-filter: blur(...);</code> (لأنها تطبق الضبابية على ما خلف العنصر).</div>
+  <div class="item answer"><strong>لغز 35 إجابة:</strong> نعطي الصورة <code>filter: grayscale(100%);</code> وعند الـ :hover نعطيها <code>filter: grayscale(0%);</code>.</div>
+  <div class="item answer"><strong>لغز 36 إجابة:</strong> تدرج لوني يبدأ بالأسود من الأعلى وينتهي بالأبيض في الأسفل.</div>
+  <div class="item answer"><strong>لغز 37 إجابة:</strong> في شاشات الهواتف الصغيرة سيخرج العنصر عن الشاشة ويسبب شريط تمرير أفقي مزعج.</div>
+  <div class="item answer"><strong>لغز 38 إجابة:</strong> <code>scroll-behavior: smooth;</code>.</div>
+  <div class="item answer"><strong>لغز 39 إجابة:</strong> <code>accent-color: purple;</code>.</div>
+  <div class="item answer"><strong>لغز 40 إجابة:</strong> <code>inset: 0;</code>.</div>
+  <div class="item answer"><strong>لغز 41 إجابة:</strong> لأن inline-start تعني "بداية السطر"؛ فتصبح تلقائياً يساراً في الإنجليزية ويميناً في العربية دون الحاجة لكتابة كود إضافي.</div>
+  <div class="item answer"><strong>لغز 42 إجابة:</strong> <code>padding-block</code>.</div>
+  <div class="item answer"><strong>لغز 43 إجابة:</strong> <code>line-height</code>.</div>
+  <div class="item answer"><strong>لغز 44 إجابة:</strong> <code>letter-spacing</code>.</div>
+  <div class="item answer"><strong>لغز 45 إجابة:</strong> <code>text-transform: uppercase;</code>.</div>
+  <div class="item answer"><strong>لغز 46 إجابة:</strong> لأن شكل الـ outline يختلف من متصفح لآخر ويكون قبيحاً أحياناً، فيتم إزالته وتعويضه بتنسيق موحد وأنيق.</div>
+  <div class="item answer"><strong>لغز 47 إجابة:</strong> border يزيد من المساحة المحجوزة للعنصر في الصفحة، بينما outline يُرسم فوق العناصر المجاورة ولا يؤثر على المساحة.</div>
+  <div class="item answer"><strong>لغز 48 إجابة:</strong> <code>isolation: isolate;</code> على العنصر الأب.</div>
+  <div class="item answer"><strong>لغز 49 إجابة:</strong> باستخدام <code>@media (prefers-color-scheme: dark) { ... }</code>.</div>
+  <div class="item answer"><strong>لغز 50 إجابة:</strong> ينشئ بطاقة مربعة الشكل (aspect-ratio: 1/1) متجاوبة مع الهواتف بحيث لا يتجاوز عرضها 300px، وتخفي أي محتوى يخرج عن حدودها (overflow: hidden)، وعندما يمرر المستخدم الماوس فوقها تكبر بنسبة 5% بنعومة خلال 0.3 ثانية.</div>
+
+  <button class="pdf-fab no-print" onclick="window.print()">
+  📄 حفظ كـ PDF
+</button>
+</body>
+</html>
